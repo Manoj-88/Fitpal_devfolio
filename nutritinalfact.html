@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitPal - Nutritional Facts</title>
+    <link rel="stylesheet" href="stylesnutritionalfacts.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        main {
+            padding: 20px;
+        }
+        .food-info {
+            margin-bottom: 20px;
+        }
+        .nutrition-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .table-row {
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        .table-cell {
+            padding: 10px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        footer {
+            display: none;
+        }
+        .calculate-nutrients {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .calculate-nutrients input, .calculate-nutrients select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        .calculate-nutrients button {
+            padding: 10px;
+            font-size: 1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .calculate-nutrients button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nutritional Facts</h1>
+    </header>
+
+    <main>
+        <section class="food-info" id="food-info">
+            <h2>Food Item: Banana</h2>
+            <div class="nutrition-table">
+                <div class="table-row">
+                    <div class="table-cell">Calories:</div>
+                    <div class="table-cell">89 kcal</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Protein:</div>
+                    <div class="table-cell">1.1g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Carbohydrates:</div>
+                    <div class="table-cell">22.8g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Fat:</div>
+                    <div class="table-cell">0.3g</div>
+                </div>
+            </div>
+
+            <h2>Food Item: Rice (per 100g)</h2>
+            <div class="nutrition-table">
+                <div class="table-row">
+                    <div class="table-cell">Calories:</div>
+                    <div class="table-cell">130 kcal</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Protein:</div>
+                    <div class="table-cell">2.7g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Carbohydrates:</div>
+                    <div class="table-cell">28g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Fat:</div>
+                    <div class="table-cell">0.3g</div>
+                </div>
+            </div>
+
+            <h2>Food Item: Roti</h2>
+            <div class="nutrition-table">
+                <div class="table-row">
+                    <div class="table-cell">Calories:</div>
+                    <div class="table-cell">70 kcal</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Protein:</div>
+                    <div class="table-cell">3g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Carbohydrates:</div>
+                    <div class="table-cell">15g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Fat:</div>
+                    <div class="table-cell">0.4g</div>
+                </div>
+            </div>
+
+            <h2>Food Item: Egg</h2>
+            <div class="nutrition-table">
+                <div class="table-row">
+                    <div class="table-cell">Calories:</div>
+                    <div class="table-cell">68 kcal</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Protein:</div>
+                    <div class="table-cell">6g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Carbohydrates:</div>
+                    <div class="table-cell">1g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Fat:</div>
+                    <div class="table-cell">5g</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="calculate-nutrients">
+            <select id="food-item">
+                <option value="banana">Banana</option>
+                <option value="rice">Rice</option>
+                <option value="roti">Roti</option>
+                <option value="egg">Egg</option>
+            </select>
+            <input type="number" id="quantity" placeholder="Enter quantity in grams">
+            <button onclick="addFood()">Add Food</button>
+            <button onclick="calculateTotal()">Calculate Total</button>
+        </section>
+
+        <section class="total-nutrients">
+            <h2>Total Nutrients</h2>
+            <div id="total-results">
+                <div class="table-row">
+                    <div class="table-cell">Calories:</div>
+                    <div class="table-cell" id="total-calories">0 kcal</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Protein:</div>
+                    <div class="table-cell" id="total-protein">0g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Carbohydrates:</div>
+                    <div class="table-cell" id="total-carbs">0g</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell">Fat:</div>
+                    <div class="table-cell" id="total-fat">0g</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 FitPal. All rights reserved.
+    </footer>
+
+    <script>
+        const nutrients = {
+            banana: { calories: 89, protein: 1.1, carbs: 22.8, fat: 0.3 },
+            rice: { calories: 130, protein: 2.7, carbs: 28, fat: 0.3 },
+            roti: { calories: 70, protein: 3, carbs: 15, fat: 0.4 },
+            egg: { calories: 68, protein: 6, carbs: 1, fat: 5 }
+        };
+
+        const selectedFoods = [];
+
+        function addFood() {
+            const foodItem = document.getElementById('food-item').value;
+            const quantity = parseFloat(document.getElementById('quantity').value);
+            if (!quantity || quantity <= 0) {
+                alert('Please enter a valid quantity');
+                return;
+            }
+            selectedFoods.push({ item: foodItem, quantity });
+            alert(`${foodItem} added!`);
+        }
+
+        function calculateTotal() {
+            let totalCalories = 0;
+            let totalProtein = 0;
+            let totalCarbs = 0;
+            let totalFat = 0;
+
+            selectedFoods.forEach(food => {
+                totalCalories += (nutrients[food.item].calories * food.quantity / 100);
+                totalProtein += (nutrients[food.item].protein * food.quantity / 100);
+                totalCarbs += (nutrients[food.item].carbs * food.quantity / 100);
+                totalFat += (nutrients[food.item].fat * food.quantity / 100);
+            });
+
+            document.getElementById('total-calories').innerText = `${totalCalories.toFixed(2)} kcal`;
+            document.getElementById('total-protein').innerText = `${totalProtein.toFixed(2)}g`;
+            document.getElementById('total-carbs').innerText = `${totalCarbs.toFixed(2)}g`;
+            document.getElementById('total-fat').innerText = `${totalFat.toFixed(2)}g`;
+        }
+    </script>
+</body>
+</html>

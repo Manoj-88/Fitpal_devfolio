@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Meal Goals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .meal-container {
+            margin-bottom: 15px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily Meal Goals</h1>
+    <div class="meal-container">
+        <h2>Meal 1</h2>
+        <label>
+            <input type="checkbox" name="meal" value="meal1"> Milk, scrambled eggs, whole-grain toast
+        </label>
+    </div>
+    <div class="meal-container">
+        <h2>Meal 2</h2>
+        <label>
+            <input type="checkbox" name="meal" value="meal2"> Brown rice or whole wheat roti, lean protein source (chicken, tofu, or lentils), a variety of cooked vegetables, a small portion of salad (cucumber, tomatoes, and onions), dal for vegetarians
+        </label>
+    </div>
+    <div class="meal-container">
+        <h2>Meal 3</h2>
+        <label>
+            <input type="checkbox" name="meal" value="meal3"> A small portion of mixed nuts (almonds, walnuts, and pistachios), a banana or a handful of grapes
+        </label>
+    </div>
+    <div class="meal-container">
+        <h2>Meal 4</h2>
+        <label>
+            <input type="checkbox" name="meal" value="meal4"> A protein shake with whey protein, milk or almond milk, and a banana or berries, or a boiled egg and a serving of brown rice
+        </label>
+    </div>
+    <div class="meal-container">
+        <h2>Meal 5: Hydration</h2>
+        <label>
+            <input type="checkbox" name="meal" value="meal5"> Drink plenty of water throughout the day, include herbal teas, but avoid excessive caffeinated beverages
+        </label>
+    </div>
+    <br>
+    <button class="submit-button" onclick="calculateBodyState()">Check Your Nutrition Status</button>
+    <h2 id="result"></h2>
+    
+    <script>
+        function calculateBodyState() {
+            const checkboxes = document.querySelectorAll('input[name="meal"]:checked');
+            const result = document.getElementById('result');
+            let selectedMeals = [];
+            
+            checkboxes.forEach((checkbox) => {
+                selectedMeals.push(checkbox.value);
+            });
+
+            if (selectedMeals.length === 0) {
+                result.textContent = "You haven't selected any meals. Please select at least one meal.";
+                result.style.color = "red";
+                return;
+            }
+
+            let bodyStateMessage = "";
+            switch (selectedMeals.length) {
+                case 1:
+                case 2:
+                    bodyStateMessage = "You've selected a few meals. Ensure you get a balanced intake of nutrients.";
+                    break;
+                case 3:
+                case 4:
+                    bodyStateMessage = "You're on the right track! Keep maintaining a balanced diet.";
+                    break;
+                case 5:
+                    bodyStateMessage = "Excellent! You've covered all your meal goals for the day.";
+                    break;
+                default:
+                    bodyStateMessage = "Please make sure to select meals that cover all nutritional needs.";
+            }
+
+            result.textContent = bodyStateMessage;
+            result.style.color = "green";
+
+            // Additional interesting feedback
+            let feedbackMessage = "";
+            if (selectedMeals.includes("meal5")) {
+                feedbackMessage += " Great job staying hydrated!";
+            }
+            if (selectedMeals.includes("meal1")) {
+                feedbackMessage += " Starting your day with a nutritious breakfast is beneficial.";
+            }
+
+            result.textContent += " " + feedbackMessage;
+        }
+    </script>
+</body>
+</html>
